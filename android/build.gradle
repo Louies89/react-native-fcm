@@ -31,10 +31,10 @@ dependencies {
     def reactNativeVersion = project.hasProperty('reactNativeVersion') ? project.reactNativeVersion : "+"
 		
 		
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.facebook.react:react-native:$reactNativeVersion"
-    compile "com.google.firebase:firebase-core:$firebaseCoreVersion"
-    compile "com.google.firebase:firebase-messaging:$firebaseMessagingVersion"
-    compile 'me.leolin:ShortcutBadger:1.1.17@aar'
-    compile "com.android.support:support-core-utils:$supportCoreUtils"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.facebook.react:react-native:$reactNativeVersion"
+    implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"
+    implementation "com.google.firebase:firebase-messaging:$firebaseMessagingVersion"
+    implementation 'me.leolin:ShortcutBadger:1.1.17@aar'
+    implementation "com.android.support:support-core-utils:$supportCoreUtils"
 }
