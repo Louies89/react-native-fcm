@@ -104,7 +104,8 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
             if (subText != null) subText = URLDecoder.decode(subText, "UTF-8");
             // Log.d("MessagingService", "MessagingService ------------------- x  1");
             NotificationCompat.Builder notification = new NotificationCompat.Builder(mContext, bundle.getString("channel", "default"))
-                    .setContentTitle(title)
+                    //Refer https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder?hl=en
+		    .setContentTitle(title)
                     .setContentText(body)
                     .setTicker(ticker)
                     .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
@@ -252,7 +253,8 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
             if (bundle.containsKey("vibrate")) {
                 long vibrate = Math.round(bundle.getDouble("vibrate", DEFAULT_VIBRATION));
                 if (vibrate > 0) {
-                    notification.setVibrate(new long[]{0, vibrate});
+                    //notification.setVibrate(new long[]{0, vibrate});  //Commented by chandrajyoti
+                    notification.setVibrate(new long[]{0, vibrate,vibrate}); //Added by Chandrajyoti
                 } else {
                     notification.setVibrate(null);
                 }
@@ -345,6 +347,11 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
                 }
 
                 Notification info = notification.build();
+                
+                if(bundle.getBoolean("repeat", false)){  //Added by Chandrajyoti
+                    info.flags = Notification.FLAG_INSISTENT; //Use it for repeating notification sound 
+                }
+                
                 // Log.d("MessagingService", "MessagingService ------------------- x  9");
                 NotificationManagerCompat.from(mContext).notify(notificationID, info);
             }
